@@ -1,18 +1,4 @@
-package main
-
-import "fmt"
-
-func main() {
-	g := make(graph[string, string])
-	g["cab"] = []string{"car", "cat"}
-	g["cat"] = []string{"mat", "bat"}
-	g["car"] = []string{"cat", "bar"}
-	g["mat"] = []string{"bat"}
-	g["bar"] = []string{"bat"}
-
-	answer := bfs("cab", "bat", g)
-	fmt.Println("最短経路:", answer)
-}
+package graph
 
 func bfs(start string, end string, g graph[string, string]) int {
 	q := &queue{}
