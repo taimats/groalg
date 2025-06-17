@@ -17,7 +17,8 @@ import (
 //	}
 func TestHuffman(t *testing.T) {
 	hf := newHuffman()
-	input := `ABBCACCEACBCCFABCDAFEABFFADBBC`
+	// input := `ABBCACCEACBCCFABCDAFEABFFADBBC`
+	input := `すもももももももものうち`
 
 	enc := hf.encode(input)
 	fmt.Printf("encmap: %+v\n", hf.encmap)

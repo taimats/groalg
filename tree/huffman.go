@@ -6,6 +6,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"slices"
+	"strings"
 )
 
 type huffman struct {
@@ -126,26 +127,15 @@ func (h *huffman) decode(encoded string) string {
 
 // textを1文字単位(rune)で探索し、文字ごとの登場頻度を算出する。
 func calcFrequency(text string) map[rune]int {
-	r := []rune(text)
 	frequency := make(map[rune]int)
-
 	//探索の重複を防ぐためにindexを設定。
-	index := make(map[int]struct{})
-	for i := 0; i < len(r); i++ {
-		index[i] = struct{}{}
-	}
-
-	for _, char := range r {
-		if len(index) == 0 {
-			break
+	index := make(map[rune]struct{})
+	for _, char := range text {
+		if _, exists := index[char]; exists {
+			continue
 		}
-		for i := range index {
-			if char == r[i] {
-				frequency[char] += 1
-				//このdelete処理で探索の重複を防ぐ、つまり、すべての文字が全探索するのを防ぐ。
-				delete(index, i)
-			}
-		}
+		frequency[char] = strings.Count(text, string(char))
+		index[char] = struct{}{}
 	}
 	return frequency
 }
