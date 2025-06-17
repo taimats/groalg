@@ -5,14 +5,27 @@ import (
 	"testing"
 )
 
+// 期待する結果
+//
+//	{
+//	 A: 01,
+//	 B: 00,
+//	 C: 11,
+//	 D: 1001,
+//	 E: 1000,
+//	 F: 101
+//	}
 func TestHuffman(t *testing.T) {
-	text := `ABBCACCEACBCCFABCDAFEABFFADBBC`
-	c := newChars()
-	c.countChars(text)
-	for k, v := range c.m {
-		fmt.Printf("{\n  文字:%s\n  頻度:%d\n}\n", string(k), v)
+	hf := newHuffman()
+	input := `ABBCACCEACBCCFABCDAFEABFFADBBC`
+
+	enc := hf.encode(input)
+	fmt.Printf("encmap: %+v\n", hf.encmap)
+	fmt.Printf("decmap: %+v\n", hf.decmap)
+	fmt.Printf("encoded: %+v\n", enc)
+	dec := hf.decode(string(enc))
+	if dec != input {
+		t.Errorf("\nNot Equal:\n{\ngot :%v\nwant:%v\n}\n", dec, input)
 	}
-	leaves := nodes(*c)
-	ht := huffman(leaves)
-	fmt.Printf("%+v", ht)
+	printCmp(input, string(enc))
 }
