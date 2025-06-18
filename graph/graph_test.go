@@ -1,6 +1,9 @@
 package graph
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestBFS(t *testing.T) {
 	g := make(graph[string, string])
@@ -13,5 +16,16 @@ func TestBFS(t *testing.T) {
 	got := bfs("cab", "bat", g)
 	if got != want {
 		t.Errorf("Not Equal: (got: %d, want: %d)", got, want)
+	}
+}
+
+func TestWalkDir(t *testing.T) {
+	path := ".."
+	files, err := walkDir(path)
+	if err != nil {
+		t.Errorf("error should be nil: (error: %v)", err)
+	}
+	for _, f := range files {
+		fmt.Println(f)
 	}
 }
