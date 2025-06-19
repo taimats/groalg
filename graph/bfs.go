@@ -1,5 +1,7 @@
 package graph
 
+type graph[K, V comparable] map[K][]V
+
 func bfs(start string, end string, g graph[string, string]) int {
 	q := &queue{}
 	q.enque(g[start]...)
@@ -25,8 +27,6 @@ func bfs(start string, end string, g graph[string, string]) int {
 	}
 	return steps[end]
 }
-
-type graph[K, V comparable] map[K][]V
 
 type queue struct {
 	data []string
