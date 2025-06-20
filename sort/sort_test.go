@@ -1,6 +1,9 @@
 package sort
 
-import "testing"
+import (
+	"slices"
+	"testing"
+)
 
 func TestQuickSort(t *testing.T) {
 	tests := []struct {
@@ -39,20 +42,11 @@ func TestQuickSort(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 			quickSort(tt.data)
-			if !equalSlices(tt.data, tt.want) {
+			if !slices.Equal(tt.data, tt.want) {
 				t.Errorf("not equal: (got: %+v, want: %+v)", tt.data, tt.want)
 			}
 		})
 	}
-}
-
-func equalSlices(got []int, want []int) bool {
-	for i, num := range got {
-		if num != want[i] {
-			return false
-		}
-	}
-	return true
 }
 
 func sequence(max int) []int {
