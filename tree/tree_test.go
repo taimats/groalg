@@ -30,3 +30,14 @@ func TestHuffman(t *testing.T) {
 	}
 	printCmp(input, string(enc))
 }
+
+func TestTrie(t *testing.T) {
+	trie := NewTrie()
+	trie.Add("word")
+	trie.Add("wheel")
+	trie.Add("world")
+	trie.Add("hospital")
+	trie.Add("mode")
+	trie.ShowTrees()
+	t.Log(trie.Contain("mo"))
+}
